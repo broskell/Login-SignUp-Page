@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Sign Up & Login Page</title>
+</head>
+<body class="bg-black flex flex-row justify-center m-[300px] font-mono">
+    <section>
+        <div class="flex flex-col items-center">
+            <h1 class="text-4xl text-white mb-8">Welcome to Our Platform</h1>
+            <div class="flex flex-row border-2 border-gray-700 p-6">
+                <div>
+                    <input id="usernameBtn" type="text" placeholder="Username" required class="mb-4 p-2 border border-gray-300 rounded w-full bg-black text-green-500">
+                    <input id="emailBtn" type="email" placeholder="Email" required class="mb-4 p-2 border border-gray-300 rounded w-full bg-black text-green-500">
+                    <input id="passwordBtn" type="password" placeholder="Password" required class="mb-4 p-2 border border-gray-300 rounded w-full bg-black text-green-500">
+                    <p id="message" class="text-2xl font-bold text-green-500 m-4"></p>
+                    <button id="signupBtn" onclick="SignUpCTA()" class="bg-green-500 text-white px-4 py-2 w-full border-green-500 hover:bg-gray-700 hover:text-green-500 transition duration-300">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let mockDatabase = [
+            {
+            username: "Saket",
+            email: "saket@gmail.com",
+            password: "password123"
+        },
+        {
+            username: "Rithvik",
+            email: "rithvik@gmail.com",
+            password: "password123"
+        }
+        ];
+
+        let username = document.getElementById("usernameBtn");
+        let email = document.getElementById("emailBtn");
+        let password = document.getElementById("passwordBtn");
+        let message = document.getElementById("message");
+        let signUp = document.getElementById("signupBtn");
+
+         function SignUpCTA() {
+            const username = document.getElementById("usernameBtn").value;
+            const email = document.getElementById("emailBtn").value;
+            const password = document.getElementById("passwordBtn").value;
+
+            for (let i = 0; i < mockDatabase.length; i++) {
+                if (mockDatabase[i].username == username || mockDatabase[i].email == email) {
+                    message.style.color = "red";
+                    message.textContent = "Username or Email already exists.";
+                    return;
+                }
+            }
+
+            if (username && email && password) {
+                mockDatabase.push({ username, email, password });
+                message.style.color = "green";
+                message.textContent = "Sign Up Successful!";
+                console.log(mockDatabase);
+                usernameBtn.value = "";
+                emailBtn.value = "";
+                passwordBtn.value = "";
+            } else {
+                message.style.color = "red";
+                message.textContent = "Please fill in all fields.";
+            }
+        };
+    </script>
+</body>
+</html>
