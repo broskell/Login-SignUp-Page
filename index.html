@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Sign Up & Login Page</title>
 </head>
-<body class="bg-black flex flex-row justify-center m-[300px] font-mono">
+<body class="bg-black flex flex-row justify-center m-[150px] font-mono">
     <section>
         <div class="flex flex-col items-center">
             <h1 class="text-4xl text-white mb-8">Welcome to Our Platform</h1>
@@ -15,7 +16,10 @@
                     <h1 class="text-green-600 mb-5 text-2xl">Enter your credentials</h1>
                     <input id="usernameBtn" type="text" placeholder="Username" required class="mb-4 p-2 border border-green-500 w-full bg-black text-green-500 hover:border-gray-300">
                     <input id="emailBtn" type="email" placeholder="Email" required class="mb-4 p-2 border border-green-500 w-full bg-black text-green-500 hover:border-gray-300">
-                    <input id="passwordBtn" type="password" placeholder="Password" required class="mb-4 p-2 border border-green-500 w-full bg-black text-green-500 hover:border-gray-300">
+                    <div class="relative">
+                        <input id="passwordBtn" type="password" placeholder="Password" required class="mb-4 p-2 border border-green-500 w-full bg-black text-green-500 hover:border-gray-300">
+                        <button  onclick="togglePasswordVisibility()" class="absolute right-2 top-2 text-green-500"><span class="material-symbols-outlined" id="pass-eye"></span></button>
+                    </div>
                     <p id="message" class="text-2xl font-bold text-green-500 mb-4"></p>
                     <button onclick="SignUpCTA()" class="bg-green-700 text-white px-4 py-2 mb-4 w-full border-green-500 hover:bg-gray-700 hover:text-green-500 transition duration-300">Sign Up</button>
                     <button onclick="LogInCTA()" class="bg-green-700 text-white px-4 py-2 w-full border-green-500 hover:bg-gray-700 hover:text-green-500 transition duration-300">Log In</button>
@@ -42,6 +46,13 @@
         let email = document.getElementById("emailBtn");
         let password = document.getElementById("passwordBtn");
         let message = document.getElementById("message");
+        let toggleEye = document.getElementById("pass-eye");
+
+
+        toggleEye.textContent = `visibility_off`;
+
+        console.log(toggleEye);
+
 
         function SignUpCTA() {
             const username = document.getElementById("usernameBtn").value;
@@ -90,6 +101,16 @@
             message.style.color = "red";
             message.textContent = "Invalid username or password or email.";
         };
+
+        function togglePasswordVisibility() {
+            if (password.type === "password") {
+                password.type = "text";
+                toggleEye.textContent = `visibility`;
+            } else {
+                password.type = "password";
+                toggleEye.textContent = `visibility_off`;
+            }
+        }
     </script>
 </body>
 </html>
